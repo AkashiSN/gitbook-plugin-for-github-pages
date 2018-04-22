@@ -1,18 +1,23 @@
 {
-    "name": "gitbook-plugin-github-pages",
-    "description": "Change links such as binary file for publication in GitHub Pages.",
+    "name": "gitbook-plugin-github-link",
+    "description": "Change the link of the binary file etc. to that of GitHub.",
     "main": "index.js",
     "version": "0.0.1",
     "engines": {
         "gitbook": "*"
     },
-    "homepage": "https://github.com/AkashiSN/gitbook-plugin-github-pages",
+    "homepage": "https://github.com/AkashiSN/gitbook-plugin-github-link",
     "repository": {
         "type": "git",
-        "url": "https://github.com/AkashiSN/gitbook-plugin-github-pages.git"
+        "url": "https://github.com/AkashiSN/gitbook-plugin-github-link.git"
     },
     "license": "Apache 2",
     "bugs": {
-        "url": "https://github.com/AkashiSN/gitbook-plugin-github-pages/issues"
+        "url": "https://github.com/AkashiSN/gitbook-plugin-github-link/issues"
+    },
+    "dependencies": {
+        "git-repo-name": "^0.6.0",
+        "git-user-name": "^2.0.0",
+        "path": "^0.12.7"
     }
 }

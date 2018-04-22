@@ -1,84 +1,33 @@
-module.exports = {
-    // Extend website resources and html
-    website: {
-        assets: "./book",
-        js: [
-            "test.js"
-        ],
-        css: [
-            "test.css"
-        ],
-        html: {
-            "html:start": function() {
-                return "<!-- Start book "+this.options.title+" -->"
-            },
-            "html:end": function() {
-                return "<!-- End of book "+this.options.title+" -->"
-            },
 
-            "head:start": "<!-- head:start -->",
-            "head:end": "<!-- head:end -->",
-
-            "body:start": "<!-- body:start -->",
-            "body:end": "<!-- body:end -->"
-        }
-    },
-
-    // Extend ebook resources and html
-    website: {
-        assets: "./book",
-        js: [
-            "test.js"
-        ],
-        css: [
-            "test.css"
-        ],
-        html: {
-            "html:start": function() {
-                return "<!-- Start book "+this.options.title+" -->"
-            },
-            "html:end": function() {
-                return "<!-- End of book "+this.options.title+" -->"
-            },
-
-            "head:start": "<!-- head:start -->",
-            "head:end": "<!-- head:end -->",
-
-            "body:start": "<!-- body:start -->",
-            "body:end": "<!-- body:end -->"
-        }
-    },
-
-    // Extend templating blocks
-    blocks: {
-        // Author will be able to write "{% myTag %}World{% endMyTag %}"
-        myTag: {
-            process: function(blk) {
-                return "Hello "+blk.body;
-            }
-        }
-    },
-
-    // Extend templating filters
-    filters: {
-        // Author will be able to write "{{ 'test'|myFilter }}"
-        myFilter: function(s) {
-            return "Hello "+s;
-        }
-    },
-
-    // Hook process during build
-    hooks: {
-        // For all the hooks, this represent the current generator
-
-        // This is called before the book is generated
-        "init": function() {
-            console.log("init!");
-        },
-
-        // This is called after the book generation
-        "finish": function() {
-            console.log("finish!");
+function renderLink(content,user_name,repo_name,file_path){
+    let result = "";
+    while(~content.indexOf('[[')){
+        let idx1 = content.indexOf('[[');
+        let idx2 = content.indexOf(']]');
+        let file_name = content.slice(idx1+2,idx2);
+        let file = file_path + "/" + file_name;
+        let link = `<a href="https://github.com/${user_name}/${repo_name}/blob/master/${file}" target="_blank">${file_name}</a>`;
+        result += content.slice(0,idx1)+link;
+        content = content.substr(idx2+2);
+        if(content.indexOf('[[')){
+           result+= content;
+           break;
         }
     }
+    return result;
+}
+
+module.exports = {
+  hooks: {
+    "page:before": function(page) {
+      let user_name = require('git-user-name')();
+      let repo_name = require('git-repo-name').sync();
+      let path = require('path');
+
+      let file_path = path.dirname(page.path);
+      page.content = renderLink(page.content,user_name,repo_name,file_path);
+
+      return page;
+    }
+  }
 };
