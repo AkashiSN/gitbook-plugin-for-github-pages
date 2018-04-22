@@ -1,1 +1,1 @@
-# gitbook-plugin-for-github-pages
+# gitbook-plugin-github-pages
