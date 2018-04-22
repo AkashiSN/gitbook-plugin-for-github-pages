@@ -1,5 +1,5 @@
 function renderLink(content,user_name,repo_name,file_path){
-    if(~content.indexOf('[[')){
+    if(~content.indexOf('[[') && ~content.indexOf(']]')){
         let result = "";
         while (~content.indexOf('[[')) {
             let idx1 = content.indexOf('[[');
