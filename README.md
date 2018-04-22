@@ -14,7 +14,7 @@ Adds the plugin to your `book.json`, then run `gitbook install` if you are build
 
 ### Usage
 
-By enclosing it with `[[` and `]]``, it recognizes the link.
+By enclosing it with `[[` and `]]`, it recognizes the link.
 
 ```
 [[hoge.exe]]
