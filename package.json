@@ -2,7 +2,7 @@
     "name": "gitbook-plugin-github-link",
     "description": "Change the link of the binary file etc. to that of GitHub.",
     "main": "index.js",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "engines": {
         "gitbook": "*"
     },
